@@ -1,46 +1,65 @@
+defmodule alias StudioSuperadmin.Admin.Contacts do
+  use Ecto.Schema
+  import Ecto.Changeset
+  alias StudioSuperadmin.Admin.Contacts
+
+  @derive {Poison.Encoder, except: [:__meta__]}
+  @fields [:mails, :other, :phones, :social]
+
+  embedded_schema do
+    field :mails,  {:array, :string}, default: []
+    field :other,  {:array, :string}, default: []
+    field :phones, {:array, :string}, default: []
+    field :social, {:array, :string}, default: []
+  end
+
+  def changeset(contacts = %Contacts{}, params \\ %{}) do
+    contacts
+    |> cast(StudioSuperadmin.Utils.model2map(params), @fields)
+    |> validate_required(@fields)
+    |> validate_change(:phones, fn
+      (:phones, []) -> [title: "at least 1 phone number is required"]
+      (:phones, [_|_]) -> []
+    end)
+  end
+
+end
+
 defmodule StudioSuperadmin.Admin do
   use Ecto.Schema
   import Ecto.Changeset
   alias StudioSuperadmin.Admin
 
   @derive {Poison.Encoder, except: [:__meta__]}
-  @fields [
+  @simple_fields [
     :name,
-    :contacts,
     :login,
     :password,
     :enabled,
   ]
-  @required_fields [
+  @simple_fields_required [
     :name,
-    :contacts,
     :login,
     :password,
   ]
 
   schema "admins" do
-    field :name,      :string
-    field :contacts,  :map
-    field :login,     :string
-    field :password,  :string
-    field :enabled,   :boolean
-    field :stamp,     :utc_datetime
+    field :name,            :string
+    field :login,           :string
+    field :password,        :string
+    field :enabled,         :boolean
+    field :stamp,           :utc_datetime
+    embeds_one :contacts,   StudioSuperadmin.Admin.Contacts, on_replace: :update
   end
 
   def changeset(admin, params \\ %{})
   def changeset(admin = %Admin{}, params = %{}) do
+    plain_params = StudioSuperadmin.Utils.model2map(params)
     admin
-    |> cast(StudioSuperadmin.Utils.model2map(params), @fields)
-    |> validate_required(@required_fields)
-    |> validate_change(:contacts, fn(:contacts, contacts) ->
-      case contacts do
-        %{"mails" => mails, "other" => other, "phones" => phones, "social" => social} ->
-          %{mails: mails, other: other, phones: phones, social: social}
-        _ ->
-          contacts
-      end
-      |> validate_contacts
-    end)
+    |> cast(plain_params, @simple_fields)
+    |> validate_required(@simple_fields_required)
+    |> put_embed(:contacts, Map.get(plain_params, :contacts))
+    |> cast_embed(:contacts, [required: true])
     |> unique_constraint(:login)
   end
 

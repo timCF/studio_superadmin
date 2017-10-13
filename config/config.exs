@@ -27,6 +27,7 @@ config :ex_admin,
   module: StudioSuperadminWeb,    # MyProject.Web for phoenix >= 1.3.0-rc
   modules: [
     StudioSuperadmin.ExAdmin.Dashboard,
+    StudioSuperadmin.ExAdmin.Admin,
   ]
 
 # Import environment specific config. This must remain at the bottom
