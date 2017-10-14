@@ -13,8 +13,9 @@ defmodule StudioSuperadmin.ExAdmin.Admin do
       where(q, [p], p.enabled == false)
     end
 
+    filter [:id, :name, :login, :enabled]
+
     index do
-      selectable_column()
       column :id
       column :name
       column :login
