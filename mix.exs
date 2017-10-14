@@ -41,7 +41,7 @@ defmodule StudioSuperadmin.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:ex_admin, github: "smpallen99/ex_admin", branch: "phx-1.3"},
+      {:ex_admin, github: "smpallen99/ex_admin"},
     ]
   end
 

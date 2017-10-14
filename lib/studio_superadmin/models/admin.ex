@@ -17,10 +17,10 @@ defmodule alias StudioSuperadmin.Admin.Contacts do
     contacts
     |> cast(StudioSuperadmin.Utils.model2map(params), @fields)
     |> validate_required(@fields)
-    |> validate_change(:phones, fn
-      (:phones, []) -> [title: "at least 1 phone number is required"]
-      (:phones, [_|_]) -> []
-    end)
+    |> validate_length(:phones, min: 1)
+    #
+    # TODO : validate on insert
+    #
   end
 
 end
@@ -58,7 +58,6 @@ defmodule StudioSuperadmin.Admin do
     admin
     |> cast(plain_params, @simple_fields)
     |> validate_required(@simple_fields_required)
-    |> put_embed(:contacts, Map.get(plain_params, :contacts))
     |> cast_embed(:contacts, [required: true])
     |> unique_constraint(:login)
   end
