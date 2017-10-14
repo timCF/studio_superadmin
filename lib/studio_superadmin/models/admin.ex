@@ -6,6 +6,7 @@ defmodule alias StudioSuperadmin.Admin.Contacts do
   @derive {Poison.Encoder, except: [:__meta__]}
   @fields [:mails, :other, :phones, :social]
 
+  @primary_key false
   embedded_schema do
     field :mails,  {:array, :string}, default: []
     field :other,  {:array, :string}, default: []
