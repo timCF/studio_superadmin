@@ -4,4 +4,5 @@ mix local.rebar --force &&
 rm -rf ./_build &&
 rm -rf ./deps &&
 mix deps.get &&
-MIX_ENV=prod mix release
+MIX_ENV=prod mix release &&
+echo "build completed in system $(uname -a)"
