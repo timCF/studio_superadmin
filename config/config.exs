@@ -11,6 +11,7 @@ config :studio_superadmin,
 
 # Configures the endpoint
 config :studio_superadmin, StudioSuperadminWeb.Endpoint,
+  server: true,
   url: [host: "localhost"],
   secret_key_base: "2LB/IQJbrHEUb8tLefjixG9v1eF4kPZ+KPrknQ6VcF6AAHBPChAopr0aXnYHXoVY",
   render_errors: [view: StudioSuperadminWeb.ErrorView, accepts: ~w(html json)],
@@ -29,12 +30,6 @@ config :ex_admin,
     StudioSuperadmin.ExAdmin.Dashboard,
     StudioSuperadmin.ExAdmin.Admin,
   ]
-
-config :studio_superadmin, :basic_auth, [
-  username: "foo",
-  password: "bar",
-  realm: "Private SuperAdmin area"
-]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

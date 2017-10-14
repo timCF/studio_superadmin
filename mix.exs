@@ -43,6 +43,7 @@ defmodule StudioSuperadmin.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ex_admin, github: "smpallen99/ex_admin"},
       {:basic_auth, "~> 2.2"},
+      {:distillery, "~> 1.5", runtime: false},
     ]
   end
 

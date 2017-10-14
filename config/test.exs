@@ -17,3 +17,9 @@ config :studio_superadmin, StudioSuperadmin.Repo,
   database: "studio",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :studio_superadmin, :basic_auth, [
+    username: "foo",
+    password: "bar",
+    realm: "Private SuperAdmin area"
+  ]

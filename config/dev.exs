@@ -14,6 +14,12 @@ config :studio_superadmin, StudioSuperadminWeb.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../assets", __DIR__)]]
 
+config :studio_superadmin, :basic_auth, [
+    username: "foo",
+    password: "bar",
+    realm: "Private SuperAdmin area"
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
