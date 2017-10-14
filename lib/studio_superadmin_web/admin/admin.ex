@@ -3,6 +3,8 @@ defmodule StudioSuperadmin.ExAdmin.Admin do
 
   register_resource StudioSuperadmin.Admin do
 
+    action_items except: [:delete]
+
     scope :all
     scope :enabled, [default: true], fn(q) ->
       where(q, [p], p.enabled == true)
@@ -17,7 +19,6 @@ defmodule StudioSuperadmin.ExAdmin.Admin do
       column :name
       column :login
       column :enabled
-      actions [:show, :edit]
     end
 
     form admin do
