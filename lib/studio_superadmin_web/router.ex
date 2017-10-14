@@ -8,25 +8,12 @@ defmodule StudioSuperadminWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BasicAuth, use_config: {:studio_superadmin, :basic_auth}
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
-  scope "/", StudioSuperadminWeb do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-  end
-
-  scope "/admin", ExAdmin do
+  scope "/", ExAdmin do
     pipe_through :browser
     admin_routes()
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", StudioSuperadminWeb do
-  #   pipe_through :api
-  # end
 end

@@ -30,6 +30,12 @@ config :ex_admin,
     StudioSuperadmin.ExAdmin.Admin,
   ]
 
+config :studio_superadmin, :basic_auth, [
+  username: "foo",
+  password: "bar",
+  realm: "Private SuperAdmin area"
+]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

@@ -6,8 +6,7 @@ defmodule StudioSuperadmin.ExAdmin.Dashboard do
     content do
       div ".blank_slate_container#dashboard_default_message" do
         span ".blank_slate" do
-          span "Welcome to ExAdmin. This is the default dashboard page."
-          small "To add dashboard sections, checkout '${web_path}/admin/dashboards.ex'"
+          span "Welcome to Studio, SuperAdmin!"
         end
       end
     end
