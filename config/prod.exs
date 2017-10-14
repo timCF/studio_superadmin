@@ -15,8 +15,14 @@ use Mix.Config
 # which you typically run after static files are built.
 config :studio_superadmin, StudioSuperadminWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
-  server: true,
-  http: [port: 7775]
+  server: true
+  # http: [port: 7775]
+  # https: [
+  #  port: 7775,
+  #  keyfile: "/etc/letsencrypt/privkey.pem",
+  #  cacertfile: "/etc/letsencrypt/chain.pem",
+  #  certfile: "/etc/letsencrypt/cert.pem"
+  # ]
 
 # Do not print debug messages in production
 config :logger, level: :info
